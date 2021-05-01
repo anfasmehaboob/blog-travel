@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'g6_@i@g%smkcz($^g8+ujx$)a8(d86)3w#2(mnz6m*v2d7r-)e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://sanjari.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
