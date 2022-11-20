@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,   login, logout 
 from django.contrib.auth.decorators import login_required
 from .filters import ProfileFilter,PostFilter
+from django.db.models import Q
 
 def index(request):
    posts = Blog.objects.order_by('-id')
@@ -24,6 +25,9 @@ def index(request):
 
 def hotels(request):
    hotels = Hotel.objects.all()
+   q = request.GET.get('search')
+   if q is not None:
+      hotels = Hotel.objects.filter(Q(name__icontains=q) | Q(place__icontains=q))
    context = {
       'hotels':hotels
    }
