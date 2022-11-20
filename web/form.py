@@ -36,6 +36,8 @@ class Booking(ModelForm):
         model = Booking
         fields = '__all__'
         exclude = ['hotel', 'rate']
+        check_in = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} )) 
         widgets = {
-            'check_in': DateInput(attrs={'class': 'required form-control date_pick'}),
+            # 'check_in': DateInput(attrs={'class': 'required form-control date_pick'}),
+            'count': NumberInput(attrs={'class': 'required form-control', 'placeholder': 'Number of Adults'}),
         }
