@@ -28,7 +28,30 @@ class Blog(models.Model):
     twoimage = VersatileImageField(upload_to='web',default='default.jpg')
     threeimage = VersatileImageField(upload_to='web',default='default.jpg')
 
-
-
     def __str__(self):
         return self.title
+
+class Hotel(models.Model):
+    name=models.CharField(max_length=200)
+    place=models.CharField(max_length=200)
+    image=models.ImageField(null=True, blank=True)
+    description=models.TextField(max_length=1000)
+    roomtype=models.CharField(max_length=200)
+    count=models.IntegerField(null=True)
+    rate=models.FloatField(max_length=200)
+    available_rooms=models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Booking(models.Model):
+    room_count=models.IntegerField(null=True)
+    rate=models.FloatField(max_length=200, null=True, blank=True)
+    hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE)
+    check_in=models.DateField(null=True)
+    check_out=models.DateField(null=True)
+    name=models.CharField(max_length=200)
+    phone=models.IntegerField(null=True)
+
+    

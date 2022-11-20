@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Blog, User
+from .models import Blog, User, Hotel
 from django.contrib.auth.forms import UserCreationForm
-from .form import UserRegisterForm, PostBlog, UserProfile, Useredit
+from .form import UserRegisterForm, PostBlog, UserProfile, Useredit, Booking
 from django.contrib import messages
 from django.contrib.auth import authenticate,   login, logout 
 from django.contrib.auth.decorators import login_required
@@ -22,6 +22,29 @@ def index(request):
    }
    return render(request,'index.html',context)
 
+def hotels(request):
+   hotels = Hotel.objects.all()
+   context = {
+      'hotels':hotels
+   }
+   return render(request,'hotels.html',context)
+
+def booking(request,pk):
+   hotel = Hotel.objects.get(pk=pk)
+   form = Booking()
+   if request.method == 'POST':
+      form = Booking(request.POST,request.FILES)
+      form.instance.user = request.user
+      form.instance.hotel = hotel
+      if form.is_valid():
+         form.save()
+         messages.success(request, 'Booking completed')
+         return redirect('hotels')
+   context = {
+      'hotel':hotel,
+      'form':form
+   }
+   return render(request,'hotel_booking.html',context) 
 
 def blogdetails(request,pk):
    posts = Blog.objects.get(id=pk)

@@ -8,3 +8,10 @@ $("form").submit(function() {
       }
     }
   });
+
+$(document).ready(function() {
+  console.log("date");
+    $(function() {
+        $( ".date_pick" ).datepicker();
+    });
+})

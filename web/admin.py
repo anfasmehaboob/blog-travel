@@ -6,3 +6,6 @@ from .models import *
 admin.site.register(Blog)
 
 admin.site.register(ProfileImg)
+
+admin.site.register(Hotel)
+admin.site.register(Booking)

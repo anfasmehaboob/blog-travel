@@ -1,7 +1,8 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Blog,ProfileImg
+from .models import Blog,ProfileImg, Booking
+from django.forms.widgets import Textarea, TextInput, EmailInput, DateInput, Select, NumberInput
 
 from django import forms
 
@@ -29,3 +30,12 @@ class PostBlog(ModelForm):
         model = Blog
         fields = '__all__'
         exclude = ['user']
+
+class Booking(ModelForm):
+    class Meta:
+        model = Booking
+        fields = '__all__'
+        exclude = ['hotel', 'rate']
+        widgets = {
+            'check_in': DateInput(attrs={'class': 'required form-control date_pick'}),
+        }
